@@ -1,5 +1,5 @@
 
-var socket = io.connect('http://192.168.43.180:3000');
+var socket = io.connect('http://localhost:3000');
 var panel ;
 var CardAEliminar;
 
