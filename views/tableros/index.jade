@@ -1,0 +1,114 @@
+extends ../layout
+block content
+  
+    
+
+  .navbar.navbar-inverse.navbar-fixed-top
+    .container-fluid
+      .navbar-header
+        .navbar-brand(href="#") Trello
+      div
+        ul.nav.navbar-nav
+          li.active
+            a(href="#") Home
+          li.dropdown
+        ul.nav.navbar-nav.navbar-right
+          a=usuario.nombre
+              span( class="glyphicon glyphicon-user" aria-hidden="true")
+          li
+            a(href='/usuarios/logout') Logout
+
+  br
+  br
+  br
+ 
+  body
+    //.container
+    .row()
+      .col-sm-8(class='well ')
+        //h1 Welcome
+        //h1=c
+        h2 Tablero : #{nombre}
+          input(type='hidden' name='s' id='idTablero' value='#{id}')
+
+          //h1 Listas
+        
+        a(class='btn btn-primary' href='/') Ver Todos los Tableros
+      .col-md-3(class='well' style='background:white;')
+        div(id="color") Color Tablero  
+            div(style='background: #{color};color:white;width:200px;height:50px;' class='btn')
+
+        button(class='btn btn-default' id='AceptarCambiarColor') Aceptar
+
+    .rowor
+      .col-md-8
+        div(class='alert alert-info' style='display:none;' id='mensajesListas' )
+          p(id='textoMensajesListas')
+
+    .row
+      div(class='contenedor col-md-11' id='contenidoTotal' style='background:#{color}' )
+        -if(listas.length==0)
+          h1(class='well') Sin Listas
+        -else
+          - for (var i=0; i<listas.length; i++)
+          
+            .lista
+              .lista_head #{listas[i].nombre}
+              
+               
+              div(class='lista_body' id='panel1')
+                p(class='well well-sm') Card 1
+                  buttom(type='button' class='btn btn-default actualizarCard' aria-label='Left Align')
+                    span(class='glyphicon glyphicon-refresh' aria-hidden='true')
+                  buttom(type='button' class='btn btn-default deleteCard' aria-label='Left Align')
+                    span(class='glyphicon glyphicon-remove' aria-hidden='true')
+                  
+                
+              .lista_footer
+                
+                button(class='btn btn-danger btnEliminarLista' id="#{listas[i]._id}" style='margin-left:10px')
+                  span(class='glyphicon glyphicon-remove' aria-hidden='true')
+                button(class='btn btn-default btnActualizarLista' id="#{listas[i]._id}" style='margin-left:10px')
+                  span(class='glyphicon glyphicon-refresh' aria-hidden='true')
+
+        .listax
+          div( id='panelx')
+            .listax_footer
+                a(class='btn btn-primary btnNewList' id='btnPanel2') Nueva Lista
+
+      //.col-md-4(style='border:solid 1px white;')
+        //div(class='well ') 
+          
+
+
+    
+  //modales
+  div(class='modal fade' id='modalEliminarLista')
+    div(class='modal-dialog')
+        div(class='modal-content')
+          h2(class='modal-title') Realmente desea eliminar esta Lista
+          div(class='modal-body')
+            p Tome en cuenta que se eliminara  todas las cards que pertenecen  a esta lista
+            input(type='hidden' name='id' id='idListaEliminar' value='')
+          div(class='modal-footer')
+            button(type='button' class='btn btn-default' data-dismiss='modal') Cancelar
+            button(type='button' class='btn btn-primary' data-dismiss='modal' style='background:red' id='btnAceptarEliminarLista') Eliminar Lista      
+              span( class="glyphicon glyphicon-remove-sign" aria-hidden="true")
+         
+  div(class='modal fade' id='modalActualizarLista')
+    div(class='modal-dialog')
+      div(class='modal-content')
+          h2(class='modal-title') Actualizar Lista
+          div(class='modal-body')
+            label Nuevo nombre de la lista
+            input(type='text' class='form-control' name='id' required='true' id='textoNuevoNombreLista')
+            input(type='hidden' name='id' id='idListaActualizar' value='')
+          div(class='modal-footer')
+            button(type='button' class='btn btn-default' data-dismiss='modal') Cancelar
+            button(type='button' class='btn btn-primary' data-dismiss='modal' id='btnAceptarActualizarLista' ) Actualizar     
+              span( class="glyphicon glyphicon-ok" aria-hidden="true")
+
+      //.col-sm-4.sidenav
+        //.well
+          //p ADS
+          //p Color de panel

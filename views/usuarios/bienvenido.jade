@@ -1,0 +1,149 @@
+extends ../layout
+block content
+  script.
+    
+
+  .navbar.navbar-inverse.navbar-fixed-top
+    .container-fluid
+      .navbar-header
+        .navbar-brand(href="#") Trello
+      div
+        ul.nav.navbar-nav
+          li.active
+            a(href="#") Home
+          li.dropdown
+        ul.nav.navbar-nav.navbar-right
+          li
+            a=usuario.nombre
+              span( class="glyphicon glyphicon-user" aria-hidden="true")
+          li
+            a(href='/usuarios/logout') Logout
+  br
+  br
+  br
+  br
+ 
+  .container
+    .row
+      .col-md-4
+        div(class='well')
+          button(class='btn btn-primary' id="nuevoTablero") Crear Nuevo Tablero    
+            span( class="glyphicon glyphicon-eject" aria-hidden="true")
+      .col-md-8
+        div(class='alert alert-info' style='display:none;' id='mensajesTableros' )
+          p(id='textoMensajesTableros')
+    .row
+    .row
+      .col-md-12  
+        h1(class='well ') Mis Tableros
+        //h1=usuario._id
+        input(type='hidden' id='idUsuario' value='#{usuario._id}')
+      
+
+    - if(tablas.length==0)
+      .row
+        .col-md-12
+          h1(class='well well-lg') Sin tableros
+          
+
+    - else
+    - for (var i=0; i<tablas.length; i++)
+      div.tableros(style='background:#{tablas[i].color}')
+        form(method="POST" action='/tablero/areatrabajo')
+          input(type='hidden' name='nombre' id='nombre' value='#{tablas[i].nombre}')
+          input(type='hidden' name='id' id='id' value='#{tablas[i]._id}')
+          input(type='hidden' name='color'  value='#{tablas[i].color}')
+          p=tablas[i].nombre
+          input(type='submit' value='Entrar' class='btn btn-default')
+          button(type="button" class="btn btn-default btnActualizarTablero" aria-label="Left Align" style='margin-left: 10px;' id='#{tablas[i]._id}') Actualizar    
+            span( class="glyphicon glyphicon-refresh" aria-hidden="true")
+          button(type="button" class="btn btn-default btnEliminarTablero" aria-label="Left Align" style='margin-left: 10px;' id='#{tablas[i]._id}') Eliminar    
+            span( class="glyphicon glyphicon-remove-sign" aria-hidden="true")
+          br
+          br
+          button(type="button" class="btn btn-default btnAgregarMiembro" aria-label="Left Align" style='margin-left: 10px;' id='#{tablas[i]._id}')   Agregar Miembro  
+              span( class="glyphicon glyphicon-user" aria-hidden="true")
+          br
+          
+          button(type="button" class="btn btn-default btnEliminarMiembro" aria-label="Left Align" style='margin-left: 10px;' id='#{tablas[i]._id}')   Eliminar Miembro  
+              span( class="glyphicon glyphicon-remove" aria-hidden="true")
+             
+
+    .row
+      .col-md-11
+        div(class='well well-lg') Tableros en los que es miembro
+        //h2=tableros_miembro.length
+    - if(tableros_miembro==0)
+      .row
+        .col-md-12
+          h3(class='well well-lg') Sin tableros Miembro
+          
+
+    - else
+    - for (var i=0; i<tableros_miembro.length; i++)
+      div.tableros(style='background:#{tableros_miembro[i].color}')
+        form(method="POST" action='/tablero/areacolaborativa')
+          input(type='hidden' name='id' id='id' value='#{tableros_miembro[i].id_tablero}')
+          h2=tableros_miembro[i].nombre
+          input(type='submit' value='Entrar' class='btn btn-default')
+          
+
+
+
+
+  div(class='modal fade' id='modalActualizarTablero')
+    div(class='modal-dialog')
+      div(class='modal-content')
+          h2(class='modal-title') Actualizar Tablero
+          div(class='modal-body')
+            label Nuevo nombre del tablero
+            input(type='text' class='form-control' name='id' required='true' id='textoNuevoNombreTablero')
+            input(type='hidden' name='id' id='idTableroActualizar' value='')
+          div(class='modal-footer')
+            button(type='button' class='btn btn-default' data-dismiss='modal') Cancelar
+            button(type='button' class='btn btn-primary' data-dismiss='modal' id='btnAceptarActualizarTablero' ) Actualizar
+
+  div(class='modal fade' id='modalCrearTablero')
+    div(class='modal-dialog')
+      div(class='modal-content')
+          h2(class='modal-title') Nuevo Tablero
+          div(class='modal-body')
+            label Nombre del nuevo tablero
+            input(type='text' class='form-control' name='id' required='true' id='textoNombreNuevoTablero')
+          div(class='modal-footer')
+            button(type='button' class='btn btn-default' data-dismiss='modal') Cancelar
+            button(type='button' class='btn btn-primary' data-dismiss='modal' id='btnAceptarCrearTablero' ) Crear Tablero     
+              span( class="glyphicon glyphicon-ok" aria-hidden="true")
+
+
+  div(class='modal fade' id='modalEliminarTablero')
+    div(class='modal-dialog')
+        div(class='modal-content')
+          h2(class='modal-title') Realmente desea eliminar este Modelo
+          div(class='modal-body')
+            p Tome en cuenta que se eliminara  todas las listas que pertenecen  a este modelo
+            input(type='hidden' name='id' id='idTableroEliminar' value='')
+          div(class='modal-footer')
+            button(type='button' class='btn btn-default' data-dismiss='modal') Cancelar
+            button(type='button' class='btn btn-primary' data-dismiss='modal' style='background:red' id='btnAceptarEliminarTablero') Eliminar      
+              span( class="glyphicon glyphicon-remove-sign" aria-hidden="true")
+
+  div(class='modal fade' id='modalInvitarUsuarios')
+    div(class='modal-dialog')
+        div(class='modal-content')
+          h2(class='modal-title') AGREGAR MIEMBROS 
+          div(class='modal-body' id='areaUsuariosInvitar')
+            
+          div(class='modal-footer')
+            button(type='button' class='btn btn-default' data-dismiss='modal') Cancelar
+
+  div(class='modal fade' id='modalEliminarUsuarios')
+    div(class='modal-dialog')
+        div(class='modal-content')
+          h2(class='modal-title') ELIMINAR  MIEMBROS 
+          div(class='modal-body' id='areaUsuariosEliminar')
+            
+          div(class='modal-footer')
+            input(type='hidden' name='id' id='idOculto' value='')
+            button(type='button' class='btn btn-default' data-dismiss='modal') Cancelar
+         

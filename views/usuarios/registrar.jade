@@ -1,0 +1,16 @@
+extends ../layout
+block content
+  div.container1
+    div#login-form
+      h3 Registrarse
+      fieldset
+        form(method="post" , action="/usuarios")
+          input(type="text",required,value="Nombre", name="name", onBlur="if(this.value=='')this.value='Nombre'" onFocus="if(this.value=='Nombre')this.value='' ")
+          input(type="email",required,value="Email@gmail.com", name="email", onBlur="if(this.value=='')this.value='Email@gmail.com'" onFocus="if(this.value=='Email@gmail.com')this.value='' ")
+          input(type="password",required,value="Password", name="password" , onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ")
+          br
+          br
+          input(type="submit", value="Registrar")
+          
+
+  

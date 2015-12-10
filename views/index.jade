@@ -1,0 +1,17 @@
+extends layout
+block content
+  div.container1
+    div#login-form
+      h3 Login
+      fieldset
+        form(method="post" , action="../usuarios/login")
+          p.error= title
+          input(type="email",required,value="Email@gmail.com", name="email", onBlur="if(this.value=='')this.value='Email@gmail.com'" onFocus="if(this.value=='Email@gmail.com')this.value='' ")
+          input(type="password",required,value="Password", name="password" , onBlur="if(this.value=='')this.value='Password'" onFocus="if(this.value=='Password')this.value='' ")
+          br
+          br
+          input(type="submit", value="Login")
+        footer.clearfix1
+          p
+            span.info1 ?
+            a(href="usuarios/registrar") Registrarse

@@ -1,0 +1,86 @@
+.contenedor{
+
+    padding:20px;
+    border:dotted 5px ;
+    white-space:nowrap;
+    overflow-x:auto;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.lista{
+    width:250px;
+    height:auto;
+    background-color: #e0e0e0;
+    margin:10px;
+    display:inline-block;
+    padding: 20px;
+    border-radius: 10px;
+}
+/*
+.panel{
+	display:inline-block;
+}*/
+
+.lista_head{
+	font-weight: bolder;
+	color: black;
+	font-size: 15px;
+}
+
+
+
+.listax{
+    width:auto;
+    height:auto;
+    background-color: #e0e0e0;
+    margin:10px;
+    display:inline-block;
+    padding: 20px;
+    border-radius: 10px;
+}
+/*
+.panel{
+	display:inline-block;
+}*/
+
+.listax_head{
+	font-weight: bolder;
+	color: black;
+	font-size: 15px;
+}
+
+
+::-webkit-scrollbar{
+  width: 10px;
+  background: #dbe8ec;
+}
+::-webkit-scrollbar-button{
+  width:8px;
+  height: 5px;
+}
+::-webkit-scrollbar-track{
+  background:#3c454e;
+  border:thin solid #1a1f25;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb{
+	/*background: transparent;*
+  /*background: -webkit-linear-gradient(top, #5aafb0, #4ca06d);*/
+  -webkit-box-shadow:   inset 0 1px 0 rgba(255,255,225,.5),
+                inset 1px 0 0 rgba(255,255,255,.4),
+                inset 0 1px 2px rgba(255,255,255,.3);
+
+  border:thin solid #232c34;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: -webkit-linear-gradient(top, #4ca06d, #5aafb0);
+}
+/* Pseudo-clase */
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(77,161,112,.6);
+}
