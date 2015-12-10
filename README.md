@@ -13,14 +13,14 @@ Engine Templade Jade
 #FUNCIONALIDADES
 
 - Iniciar Sesíon
-- Regristro de Usuarios
+- Registro de Usuarios
 - Crear Nuevos Tableros
 - Actualizar Tableros
 - Eliminar Tableros
 - Crear Listas dentro de los tableros
 - Eliminar listas
 - Actualizar Listas
-- Crear Miembros de algun tablero
+- Agregar Miembros de algun tablero
 - Colaborar en un tablero al cual se es miembro
 
 #DESCRIPCIÓN
